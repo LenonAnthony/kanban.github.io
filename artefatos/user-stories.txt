@@ -1,0 +1,21 @@
+US01 - Como um usuário comum, quero poder criar e personalizar diferentes quadros kanban, para gerenciar projetos específicos.
+
+US02 - Como um usuário comum, quero a opção de personalizar as colunas do quadro kanban para atender às necessidades específicas do meu projeto
+
+US03 - Como um usuário comum, quero a capacidade de anexar documentos ou links diretamente às tarefas, para facilitar o acesso a recursos relevantes.
+
+US04 - Como um usuário comum, quero adicionar prazos às tarefas e receber lembretes automáticos, para garantir que as metas sejam cumpridas.
+
+US05 - Como um usuário comum, quero a capacidade de exportar relatórios e dados do quadro kanban, para análise ou arquivamento futuro.
+
+US06 - Como um membro da equipe, quero poder comentar nas tarefas, para facilitar a comunicação e colaboração com outros membros.
+
+US07 - Como um membro da equipe, desejo atribuir tarefas a mim mesmo.
+
+US08 - Como um gerente de projeto, desejo atribuir tarefas aos membros da equipe, para garantir uma distribuição equitativa de trabalho.
+
+US09 - Como um gerente de projeto, quero classificar as tarefas por prioridade, permitindo uma visão clara das atividades mais importantes.
+
+US10 - Como um gerente de projeto, quero receber notificações automáticas quando uma tarefa for concluída ou se houver algum impedimento.
+
+US11 - Como um gerente de projeto, desejo um painel de análise visual para acompanhar o progresso e identificar possíveis gargalos.

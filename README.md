@@ -1,2 +1,5 @@
-# ProjetoMA2023.1
- Projeto para a disciplina de Metodologias Ágeis de Desenvolvimento de Software.
+Projeto criado com a finalidade de implementação em Java de um Kanban Board.
+
+IDEs utilizadas: Eclipse e Visual Studio Code.
+
+Versão do Java: 8.
