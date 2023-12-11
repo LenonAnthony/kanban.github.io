@@ -1,5 +1,5 @@
-Projeto criado com a finalidade de implementação em Javascript de um Kanban Board.
+Projeto criado com a finalidade de implementação de um Kanban Board.
 
 IDEs utilizadas: Visual Studio Code.
 
-Versão do Java: 8.
+Tecnologias utilizadas: HTML, CSS, JavaScript, TypeScript, Tailwind e a biblioteca Dnd-Kit.

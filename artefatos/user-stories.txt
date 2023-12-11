@@ -1,6 +1,6 @@
 US01 - Como um usuário comum, quero poder criar e personalizar diferentes quadros kanban, para gerenciar projetos específicos.
 
-US02 - Como um usuário comum, quero a opção de personalizar as colunas do quadro kanban para atender às necessidades específicas do meu projeto
+US02 - Como um usuário comum, quero a opção de personalizar as colunas do quadro kanban para atender às necessidades específicas do meu projeto.
 
 US03 - Como um usuário comum, quero a capacidade de anexar documentos ou links diretamente às tarefas, para facilitar o acesso a recursos relevantes.
 
