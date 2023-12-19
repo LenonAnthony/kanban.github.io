@@ -1,4 +1,5 @@
 import { Column, Id } from "../types";
+import { useState } from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import TrashIcon from "../icons/TrashIcon";
@@ -6,10 +7,13 @@ import TrashIcon from "../icons/TrashIcon";
 interface Props {
     column: Column;
     deleteColumn: (id: Id) => void;
+    updateColumn: (id: Id, title: string) => void;
 }
 
 function ColumnContainer(props: Props) {
-    const { column, deleteColumn } = props;
+    const { column, deleteColumn, updateColumn } = props;
+
+    const [editMode, setEditMode] = useState(false);
 
     const { setNodeRef, attributes, listeners, transform, transition, isDragging } = useSortable({
         id: column.id,
@@ -17,6 +21,7 @@ function ColumnContainer(props: Props) {
             type: "Column",
             column,
         },
+        disabled: editMode,
     });
 
     const style = {
@@ -61,6 +66,9 @@ function ColumnContainer(props: Props) {
             <div
                 {...attributes}
                 {...listeners}
+                onClick = {() => {
+                    setEditMode(true);
+                }}
                 className="
                     bg-mainBackGroundColor
                     text-md
@@ -90,22 +98,37 @@ function ColumnContainer(props: Props) {
                     ">
                         0
                     </div>
-                    {column.title}
-                </div>
-                <button
-                onClick = {() => {
-                    deleteColumn (column.id);
-                }}
-                    className="
-                        stroke-gray-500
-                        hover:stroke-white
-                        hover:bg-columnBackGroundColor
-                        rounded
-                        px-1
-                        py-2
-                ">
-                    <TrashIcon />
-                </button>
+                    {!editMode && column.title}
+                    {editMode && (
+                        <input
+                            className = "bg-black focus:border-rose-500 border rounded outline-none px-2"
+                            value = {column.title}
+                            autoFocus 
+                            onBlur = {() => {
+                                setEditMode(false);
+                            }}
+                            onKeyDown = {e => {
+                                if (e.key !== "Enter") return;
+                                setEditMode(false);
+                            }}
+                            onChange = {(e) => updateColumn(column.id, e.target.value)}
+                        />
+                    )}
+                    </div>
+                    <button
+                        onClick = {() => {
+                            deleteColumn (column.id);
+                        }}
+                        className="
+                            stroke-gray-500
+                            hover:stroke-white
+                            hover:bg-columnBackGroundColor
+                            rounded
+                            px-1
+                            py-2
+                        ">
+                        <TrashIcon />
+                    </button>
             </div>
             {/* Container das tasks relativas as colunas */}
             <div className = "flex flex-grow">Conteúdo</div>
