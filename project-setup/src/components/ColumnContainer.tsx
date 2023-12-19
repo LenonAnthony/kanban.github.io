@@ -1,6 +1,7 @@
+import { Column, Id } from "../types";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 import TrashIcon from "../icons/TrashIcon";
-import { Id } from "../types";
-import { Column } from "../types";
 
 interface Props {
     column: Column;
@@ -9,8 +10,44 @@ interface Props {
 
 function ColumnContainer(props: Props) {
     const { column, deleteColumn } = props;
+
+    const { setNodeRef, attributes, listeners, transform, transition, isDragging } = useSortable({
+        id: column.id,
+        data: {
+            type: "Column",
+            column,
+        },
+    });
+
+    const style = {
+        transition,
+        transform: CSS.Transform.toString(transform),
+    };
+
+    if (isDragging) {
+        return (
+            <div
+                ref = {setNodeRef}
+                style = {style}
+                className="
+                    bg-columnBackGroundColor
+                    opacity-40
+                    border-2
+                    border-rose-500
+                    w-[350px]
+                    h-[500px]
+                    max-h-[500px]
+                    rounded-md
+                    flex
+                    flex-col
+            "></div>
+        );
+    }
+
     return (
         <div
+            ref = {setNodeRef}
+            style = {style}
             className="
                 bg-columnBackGroundColor
                 w-[350px]
@@ -22,20 +59,22 @@ function ColumnContainer(props: Props) {
         ">
             {/* Título das colunas */}
             <div
+                {...attributes}
+                {...listeners}
                 className="
-                bg-mainBackGroundColor
-                text-md
-                h-[60px]
-                cursor-grab
-                rounded-md
-                rounded-b-none
-                p-3
-                font-bold
-                border-columnBackGroundColor
-                border-4
-                flex
-                items-center
-                justify-between
+                    bg-mainBackGroundColor
+                    text-md
+                    h-[60px]
+                    cursor-grab
+                    rounded-md
+                    rounded-b-none
+                    p-3
+                    font-bold
+                    border-columnBackGroundColor
+                    border-4
+                    flex
+                    items-center
+                    justify-between
             ">
                 <div className = "flex gap-2">
                     <div
