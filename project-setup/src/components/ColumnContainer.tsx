@@ -1,17 +1,23 @@
-import { Column, Id } from "../types";
+import { Column, Id, Task } from "../types";
 import { useState } from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import TrashIcon from "../icons/TrashIcon";
+import PlusIcon from "../icons/PlusIcon";
+import TaskCard from "./TaskCard";
 
 interface Props {
     column: Column;
     deleteColumn: (id: Id) => void;
     updateColumn: (id: Id, title: string) => void;
+
+    createTask: (columnId: Id) => void;
+    deleteTask: (id: Id) => void;
+    tasks: Task[];
 }
 
 function ColumnContainer(props: Props) {
-    const { column, deleteColumn, updateColumn } = props;
+    const { column, deleteColumn, updateColumn, createTask, tasks, deleteTask } = props;
 
     const [editMode, setEditMode] = useState(false);
 
@@ -32,8 +38,8 @@ function ColumnContainer(props: Props) {
     if (isDragging) {
         return (
             <div
-                ref = {setNodeRef}
-                style = {style}
+                ref={setNodeRef}
+                style={style}
                 className="
                     bg-columnBackGroundColor
                     opacity-40
@@ -51,8 +57,8 @@ function ColumnContainer(props: Props) {
 
     return (
         <div
-            ref = {setNodeRef}
-            style = {style}
+            ref={setNodeRef}
+            style={style}
             className="
                 bg-columnBackGroundColor
                 w-[350px]
@@ -66,7 +72,7 @@ function ColumnContainer(props: Props) {
             <div
                 {...attributes}
                 {...listeners}
-                onClick = {() => {
+                onClick={() => {
                     setEditMode(true);
                 }}
                 className="
@@ -84,7 +90,7 @@ function ColumnContainer(props: Props) {
                     items-center
                     justify-between
             ">
-                <div className = "flex gap-2">
+                <div className="flex gap-2">
                     <div
                         className="
                             flex
@@ -101,25 +107,25 @@ function ColumnContainer(props: Props) {
                     {!editMode && column.title}
                     {editMode && (
                         <input
-                            className = "bg-black focus:border-rose-500 border rounded outline-none px-2"
-                            value = {column.title}
-                            autoFocus 
-                            onBlur = {() => {
+                            className="bg-black focus:border-rose-500 border rounded outline-none px-2"
+                            value={column.title}
+                            autoFocus
+                            onBlur={() => {
                                 setEditMode(false);
                             }}
-                            onKeyDown = {e => {
+                            onKeyDown={e => {
                                 if (e.key !== "Enter") return;
                                 setEditMode(false);
                             }}
-                            onChange = {(e) => updateColumn(column.id, e.target.value)}
+                            onChange={(e) => updateColumn(column.id, e.target.value)}
                         />
                     )}
-                    </div>
-                    <button
-                        onClick = {() => {
-                            deleteColumn (column.id);
-                        }}
-                        className="
+                </div>
+                <button
+                    onClick={() => {
+                        deleteColumn(column.id);
+                    }}
+                    className="
                             stroke-gray-500
                             hover:stroke-white
                             hover:bg-columnBackGroundColor
@@ -127,15 +133,24 @@ function ColumnContainer(props: Props) {
                             px-1
                             py-2
                         ">
-                        <TrashIcon />
-                    </button>
+                    <TrashIcon />
+                </button>
             </div>
             {/* Container das tasks relativas as colunas */}
-            <div className = "flex flex-grow">Conteúdo</div>
+            <div className="flex flex-grow flex-col gap-4 p-2 overflow-x-hidden overflow-y-auto">{
+            tasks.map(task => (
+                <TaskCard key={task.id} task={task} deleteTask={deleteTask}/>
+            ))}
+            </div>
             {/* Rodapé das colunas */}
-            <div className = "">Rodapé</div>
+            <button
+                className="flex gap-2 items-center border-columnBackgroundColor border-2 rounded-md p-4 border-x-columnBackgroundColor hover:bg-mainBackgroundColor hover:text-rose-500 active:bg-black"
+                onClick={() => {
+                    createTask(column.id);
+                }}
+            ><PlusIcon />Adicionar tarefa</button>
         </div>
-    ) 
+    )
 }
 
 export default ColumnContainer;

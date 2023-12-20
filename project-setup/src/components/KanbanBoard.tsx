@@ -1,14 +1,16 @@
-import { Column, Id } from "../types";
+import { Column, Id, Task } from "../types";
 import ColumnContainer from "./ColumnContainer";
 import { useMemo, useState } from "react";
 import { createPortal } from "react-dom";
-import { DndContext, DragOverlay, DragStartEvent, PointerSensor, useSensor, useSensors } from "@dnd-kit/core";
+import { DndContext, DragOverlay, DragStartEvent, DragEndEvent, PointerSensor, useSensor, useSensors } from "@dnd-kit/core";
 import { SortableContext, arrayMove } from "@dnd-kit/sortable";
 import PlusIcon from "../icons/PlusIcon";
 
 function KanbanBoard() {
     const [columns, setColumns] = useState<Column[]>([]);
     const columnsId = useMemo(() => columns.map((col) => col.id), [columns]);
+
+    const [tasks, setTasks] = useState<Task[]>([]);
 
     const [activeColumn, setActiveColumn] = useState<Column | null>(null);
 
@@ -37,6 +39,9 @@ function KanbanBoard() {
                                     column = {col} 
                                     deleteColumn = {deleteColumn} 
                                     updateColumn = {updateColumn}
+                                    createTask={createTask}
+                                    deleteTask={deleteTask}
+                                    tasks={tasks.filter((task) => task.columnId === col.id)}
                                 />
                             ))}
                         </SortableContext>
@@ -70,6 +75,9 @@ function KanbanBoard() {
                                 column = {activeColumn}
                                 deleteColumn = {deleteColumn} 
                                 updateColumn = {updateColumn}
+                                createTask={createTask}
+                                deleteTask={deleteTask}
+                                tasks={tasks.filter((task) => task.columnId === activeColumn.id)}
                             />)
                         }
                     </DragOverlay>,
@@ -78,6 +86,21 @@ function KanbanBoard() {
             </DndContext>
         </div>
     );
+
+    function createTask(columnId: Id) {
+        const newTask: Task = {
+            id: generateId(),
+            columnId,
+            content:`Tarefa ${tasks.length + 1}`,
+        };
+        setTasks([...tasks, newTask]);
+    }
+
+    function deleteTask(id: Id) {
+        const newTasks = tasks.filter((task) => task.id !== id);
+        setTasks(newTasks);
+    }
+
 
     function createNewColumn() {
         const columnToAdd:Column = {
