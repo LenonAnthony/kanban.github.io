@@ -5,9 +5,10 @@ import { Id, Task } from "../types";
 interface Props {
     task: Task;
     deleteTask: (id: Id) => void;
+    updateTask: (id: Id, content: string) => void;
 }
 
-function TaskCard({ task, deleteTask}: Props) {
+function TaskCard({ task, deleteTask, updateTask }: Props) {
     const [mouseIsOver, setMouseIsOver] = useState(false);
     const [editMode, setEditMode] = useState(false);
 
@@ -48,8 +49,11 @@ function TaskCard({ task, deleteTask}: Props) {
                         placeholder = "Conteúdo da Task"
                         onBlur = {toggleEditMode}                    
                         onKeyDown = {(e) => {
-                            if (e.key === "Enter") toggleEditMode();
-                        }}>
+                            if (e.key === "Enter" && e.shiftKey) {
+                                toggleEditMode();
+                            }
+                        }}
+                        onChange = {(e) => updateTask(task.id, e.target.value)}>
                     </textarea>
             </div>
         )
@@ -71,7 +75,8 @@ function TaskCard({ task, deleteTask}: Props) {
             hover:ring-inset 
             hover:ring-rose-500 
             cursor-grab
-            relative"
+            relative
+            task"
             onMouseEnter={() => {
                 setMouseIsOver(true);
             }}
@@ -79,20 +84,28 @@ function TaskCard({ task, deleteTask}: Props) {
                 setMouseIsOver(false);
             }}
         >
-            {task.content}
+            <p
+                className="
+                my-auto
+                h-[90%]
+                w-full
+                overflow-y-auto
+                overflow-x-hidden
+                whitespace-pre-wrap">{task.content}</p>
+
             {mouseIsOver && (
                 <button onClick={() =>{
                     deleteTask(task.id);
                 }} className="stroke-white 
-                absolute 
-                right-4 
-                top-1/2 
-                -translate-y-1/2 
-                bg-columnBackgroundColor 
-                p-2 
-                rounded 
-                opacity-60 
-                hover:opacity-100"
+                    absolute 
+                    right-4 
+                    top-1/2 
+                    -translate-y-1/2 
+                    bg-columnBackgroundColor 
+                    p-2 
+                    rounded 
+                    opacity-60 
+                    hover:opacity-100"
                 >
                     <TrashIcon />
                 </button>
