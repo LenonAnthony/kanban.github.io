@@ -17,9 +17,16 @@ interface Props {
     tasks: Task[];
 }
 
-function ColumnContainer(props: Props) {
-    const { column, deleteColumn, updateColumn, createTask, tasks, deleteTask, updateTask } = props;
-
+function ColumnContainer({
+    column, 
+    deleteColumn, 
+    updateColumn, 
+    createTask, 
+    tasks, 
+    deleteTask, 
+    updateTask
+}: Props) {
+    
     const [editMode, setEditMode] = useState(false);
 
     const tasksIds = useMemo(() => {
