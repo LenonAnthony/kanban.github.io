@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import styles from './Login.module.css';
+import axios from 'axios';
 
 interface LoginFormState {
   username: string;
@@ -24,9 +25,22 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
     }));
   }, []);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    onLogin(formState);
+  
+    try {
+    
+      // Replace '/api/login' with the actual path to your backend login endpoint
+      const response = await axios.post('http://localhost:3000/api/login', { board_code: formState.username });
+      
+      // Handle successful login
+      console.log(response.data);
+      // Call the passed onLogin prop with the returned data or status
+      onLogin(response.data);
+    } catch (error) {
+      // Handle login errors
+      console.error(error);
+    }
   };
 
   return (
