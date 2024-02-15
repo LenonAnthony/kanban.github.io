@@ -35,6 +35,7 @@
   padding:  10px;
   border:  1px solid;
   transition: border-color  0.3s ease;
+  width:  400px;
 }
 
 .loginForm input:focus {
