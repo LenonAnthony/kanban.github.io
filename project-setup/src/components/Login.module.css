@@ -35,7 +35,7 @@
   padding:  10px;
   border:  1px solid;
   transition: border-color  0.3s ease;
-  width:  400px;
+  width:  450px;
 }
 
 .loginForm input:focus {
@@ -55,4 +55,10 @@
 
 .loginForm button:hover {
   background-color: #f43f5e;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: space-between; 
+  width:  15%; 
 }

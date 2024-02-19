@@ -25,13 +25,21 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
     }));
   }, []);
 
+  const handleRegisterClick = async () => {
+    try {
+      const response = await axios.post('http://localhost:3000/api/register', { board_code: formState.username });
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-  
+   
     try {
-    
-      // Replace '/api/login' with the actual path to your backend login endpoint
-      const response = await axios.post('http://localhost:3000/api/login', { board_code: formState.username });
+      // Aqui também estamos usando formState.username, que é atualizado pelo handleInputChange
+      const response = await axios.post('http://localhost:3000/api/login', {  board_code: `"${formState.username}"` });
       
       // Handle successful login
       console.log(response.data);
@@ -54,7 +62,10 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
           value={formState.username}
           onChange={handleInputChange}
         />
-        <button type="submit">Entrar</button>
+        <div className={styles.buttonContainer}>
+          <button type="submit">Entrar</button>
+          <button type="button" onClick={handleRegisterClick}>Registrar</button>
+        </div>
       </form>
     </div>
   );
