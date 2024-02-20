@@ -27,7 +27,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
 
   const handleRegisterClick = async () => {
     try {
-      const response = await axios.post('http://localhost:3000/api/register', { board_code: formState.username });
+      const response = await axios.post('http://localhost:3000/api/register', { board_code: `"${formState.username}"` });
       console.log(response.data);
     } catch (error) {
       console.error(error);

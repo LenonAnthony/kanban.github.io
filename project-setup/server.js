@@ -11,9 +11,8 @@ app.use(cors());
 
 app.post('/api/login', (req, res) => {
   const board_code = req.body.board_code;
-
-  board_code = `"${board_code}"`;
-
+  
+  
   console.log('board_code from request:', board_code);
   // Query the database to find a matching board_code
   connection.query(`SELECT * FROM KanbanBoards WHERE board_code = ?`, [board_code], (error, results) => {
