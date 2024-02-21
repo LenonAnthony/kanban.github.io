@@ -4,3 +4,4 @@ export default {
     PASSWORD: "1234",
     DATABASE: "kanban"
   };
+  
