@@ -4,7 +4,7 @@
   align-items: center;
   height:  100vh; /* Full height of the viewport */
   width:  100vw; /* Full width of the viewport */
-  background: linear-gradient(to right top, #485461, #28313b);
+  background: linear-gradient(to down top, #485461, #28313b);
 }
 
 .loginForm label {
@@ -42,8 +42,8 @@
 }
 
 .loginForm input:focus {
-  border-color: #f43f5e;
-  box-shadow: 0 0 10px rgba(244, 63, 94, 0.3);
+  border-color: #3498db;
+  box-shadow: 0 0 10px;
   outline: none;
 }
 
