@@ -4,10 +4,11 @@
   align-items: center;
   height:  100vh; /* Full height of the viewport */
   width:  100vw; /* Full width of the viewport */
+  background: linear-gradient(to down top, #485461, #28313b);
 }
 
 .loginForm label {
-  color: #f43f5e;
+  color: #ffffff;
 }
 
 .loginForm {
@@ -20,10 +21,11 @@
   width:  100%;
   padding:  20px;
   border-radius:  5px;
-  box-shadow:  0  0  10px rgba(0,  0,  0,  0.1);
+  box-shadow:  0  0  5px rgba(0,  0,  0,  0);
 }
 
 .loginForm label {
+  margin-bottom: 10px;
   transition: transform  0.3s ease;
 }
 
@@ -36,10 +38,12 @@
   border:  1px solid;
   transition: border-color  0.3s ease;
   width:  450px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .loginForm input:focus {
-  border-color: #f43f5e;
+  border-color: #3498db;
+  box-shadow: 0 0 10px;
   outline: none;
 }
 
@@ -53,6 +57,10 @@
   transition: background-color  0.3s ease;
 }
 
+.loginForm button:nth-child(2) {
+  background-color: #3498db;
+}
+
 .loginForm button:hover {
   background-color: #f43f5e;
 }
@@ -61,4 +69,5 @@
   display: flex;
   justify-content: space-between; 
   width:  15%; 
+  margin-top: 15px;
 }

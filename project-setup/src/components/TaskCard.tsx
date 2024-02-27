@@ -48,7 +48,7 @@ function TaskCard({ task, deleteTask, updateTask }: Props) {
                 text-left 
                 rounded-xl 
                 border-2
-                border-rose-500
+                #3498db
                 opacity-30
                 cursor-grab
                 relative"/>
@@ -73,7 +73,7 @@ function TaskCard({ task, deleteTask, updateTask }: Props) {
                 rounded-xl 
                 hover:ring-2 
                 hover:ring-inset 
-                hover:ring-rose-500 
+                hover:#3498db
                 cursor-grab
                 relative
                 task">
@@ -120,7 +120,7 @@ function TaskCard({ task, deleteTask, updateTask }: Props) {
             rounded-xl 
             hover:ring-2 
             hover:ring-inset 
-            hover:ring-rose-500 
+            hover:#3498db
             cursor-grab
             relative"
             onMouseEnter={() => {
