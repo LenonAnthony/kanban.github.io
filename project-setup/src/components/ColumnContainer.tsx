@@ -114,7 +114,6 @@ function ColumnContainer({
                             text-sm
                             rounded-full
                     ">
-                        0
                     </div>
                     {!editMode && column.title}
                     {editMode && (
@@ -162,7 +161,7 @@ function ColumnContainer({
                 onClick={() => {
                     createTask(column.id);
                 }}
-            ><PlusIcon />Adicionar tarefa</button>
+            ><PlusIcon />Adicionar Tarefa</button>
         </div>
     )
 }
